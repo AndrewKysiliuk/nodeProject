@@ -2,16 +2,16 @@
   "users": [
     {
 		"name": "Andriy",
-		"email": "andriy.av95@urk.net",
-		"password": "Qwerty1234",
+		"email": "andriy.av95@ukr.net",
+		"password": "1111",
 		"phone": "+380669575871",
 		"avatarUrl": "",
-		"key": "andriy.av95@urk.netQwerty1234"
+		"key": "andriy.av95@ukr.netQwerty1234"
     }
   ],
   "usersData": [
 	  {
-		  "key": "andriy.av95@urk.netQwerty1234",
+		  "key": "andriy.av95@ukr.netQwerty1234",
 		  "categories": [
 			  {
 				  "catName": "alco",

@@ -12,30 +12,37 @@ module.exports = class DataBase {
             {
                 "catName": "alco",
                 "title" : "Алкогольні напої",
+                "data": []
             },
             {
                 "catName": "noAlco",
                 "title" : "Безалкогольні напої",
+                "data": []
             },
             {
                 "catName": "salad",
                 "title" : "Салати",
+                "data": []
             },
             {
                 "catName": "first",
                 "title" : "Перші страви",
+                "data": []
             },
             {
                 "catName": "sup",
                 "title" : "Супи",
+                "data": []
             },
             {
                 "catName": "pizza",
                 "title" : "Піца",
+                "data": []
             },
             {
                 "catName": "sushi",
                 "title" : "Суші",
+                "data": []
             }
         ];
     }
@@ -99,19 +106,20 @@ module.exports = class DataBase {
     registration(item) {
         return new Promise((resolve, reject) => {
             if(this._users.find(user => user.email === item.email)) {
-                reject(`User with email: ${item.email} already exists`);
+                reject(`Користувач з таким E-mail: ${item.email} вже існує`);
             }
             else {
                 let userData = {
                     'key': `${item.email}${item.password}`,
                     'categories': this._defaultCategory
                 };
+                item.key = `${item.email}${item.password}`;
                 this._usersData.push(userData);
                 this._users.push(item);
 
                 fs.writeFile(dbPath, JSON.stringify(this._data),'utf-8', () => {
                     console.log('New user was create');
-                    resolve('New user was create');
+                    resolve('Створено нового користувача');
                 });
             }
         });
@@ -123,10 +131,14 @@ module.exports = class DataBase {
             if(keyData) {
                 let needCategory = keyData.categories.find(item => item.catName === category);
                 if (needCategory) {
+                    item.id = needCategory.data.length+1;
                     needCategory.data.unshift(item);
-                    fs.writeFile(dbPath, JSON.stringify(this._data),'utf-8', () => {
+                    fs.writeFile(dbPath, JSON.stringify(this._data),'utf-8', (err) => {
+                        if(err){
+                            reject('error');
+                        }
                         console.log('New item was write');
-                        resolve('New item was write');
+                        resolve('OK');
                     });
                 }
             }

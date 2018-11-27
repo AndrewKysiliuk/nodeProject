@@ -39,15 +39,15 @@ app.post('/authorization', (req, res) => {
 });
 app.post('/registration', (req, res) => {
     base.registration(req.body).then(
-        resolve => res.status(200).send(resolve),
-        reject => res.status(404).send(reject)
+        resolve => res.status(200).send(JSON.stringify(resolve)),
+        reject => res.status(401).send(JSON.stringify(reject))
     );
 });
 
 app.post('/home/:key/:category', (req, res) => {
     base.post(req.params.key, req.params.category, req.body).then(
-        resolve => res.status(200).send(resolve),
-        reject => res.status(404).send(reject));
+        resolve => res.status(200).send(JSON.stringify(resolve)),
+        reject => res.status(404).send(JSON.stringify(reject)));
 });
 
 app.put('/home/:key/:category/:id', (req, res) =>{
